@@ -1,0 +1,16 @@
+package com.backend.models.enums;
+
+public enum MessageLink {
+    BAD_REQUEST,
+    NOT_FOUND,
+    NAME_TAKEN,
+    NAME_INCORRECT,
+    EMAIL_TAKEN,
+    EMAIL_INCORRECT,
+    WRONG_LOGIN_USERNAME,
+    WRONG_LOGIN_EMAIL,
+    WRONG_LOGIN_PASSWORD,
+    PERMISSION_NOT_ALLOWED,
+    NAME_CHANGE_FORBIDDEN,
+}
+
