@@ -23,7 +23,7 @@ public class Organization {
     @Column(name = "id", columnDefinition = "BINARY(16)")
     private UUID id;
 
-    @Column(nullable = false, length = 64, unique = true)
+    @Column(nullable = false, length = 32, unique = true)
     private String name;
 
     @Column(nullable = false)
@@ -44,5 +44,10 @@ public class Organization {
     @Column(nullable = false)
     private String email;
 
+    @ManyToOne
+    @JoinColumn(name = "chain_id")
+    private OrganizationChain chain;
+
     private long createdAt;
+
 }
