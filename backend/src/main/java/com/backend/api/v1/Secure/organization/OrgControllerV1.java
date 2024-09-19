@@ -1,6 +1,5 @@
-package com.backend.api.v1.Public.organization;
+package com.backend.api.v1.Secure.organization;
 
-import com.backend.exceptions.ServiceException;
 import com.backend.models.dto.OrganizationDTO;
 import com.backend.models.dto.request.CreateOrgRegistrationRequest;
 import com.backend.models.entity.Organization;
@@ -18,7 +17,7 @@ import java.util.UUID;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/v1/public/organization")
+@RequestMapping("/api/v1/secure/organization")
 public class OrgControllerV1 {
 
     private final OrganizationSvc organizationSvc;
@@ -34,7 +33,7 @@ public class OrgControllerV1 {
             );
         } catch (EntityNotFoundException e) {
             return new RestResponseEntity<>(
-                    new RestResponseBody<>(true, messageBundle.getMsg(MessageLink.NOT_FOUND), null),
+                    new RestResponseBody<>(false, messageBundle.getMsg(MessageLink.NOT_FOUND), null),
                     HttpStatus.NOT_FOUND
             );
         } catch (Exception e) {

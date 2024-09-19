@@ -23,6 +23,8 @@ public class OrganizationDTO implements Serializable {
     private String email;
     private long createdAt;
 
+    private UUID chainId;
+
     public OrganizationDTO(Organization organization){
         this.id = organization.getId();
         this.name = organization.getName();
@@ -33,5 +35,9 @@ public class OrganizationDTO implements Serializable {
         this.number = organization.getNumber();
         this.email = organization.getEmail();
         this.createdAt = organization.getCreatedAt();
+
+        if (organization.getChain() != null) {
+            this.chainId = organization.getChain().getId();
+        }
     }
 }
