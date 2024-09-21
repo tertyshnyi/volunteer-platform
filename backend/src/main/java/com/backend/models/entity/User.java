@@ -40,8 +40,12 @@ public class User {
     private String phoneNumber;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private UserRole userRole;
+
+    @ManyToOne
+    @JoinColumn(name="organization_id")
+    private Organization organization;
+
     @Column(nullable = false)
     private long createdAt;
 

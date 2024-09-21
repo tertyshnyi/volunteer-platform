@@ -1,12 +1,15 @@
 package com.backend.models.dto;
 
 import com.backend.models.entity.Organization;
+import com.backend.models.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -23,6 +26,7 @@ public class OrganizationDTO implements Serializable {
     private String email;
     private long createdAt;
 
+    private Set<UUID> managerIds;
     private UUID chainId;
 
     public OrganizationDTO(Organization organization){
@@ -39,5 +43,10 @@ public class OrganizationDTO implements Serializable {
         if (organization.getChain() != null) {
             this.chainId = organization.getChain().getId();
         }
+
+        this.managerIds = organization.getManagers()
+                .stream()
+                .map(User::getId)
+                .collect(Collectors.toSet());
     }
 }

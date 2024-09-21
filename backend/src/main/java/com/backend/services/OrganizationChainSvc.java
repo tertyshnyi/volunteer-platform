@@ -50,9 +50,11 @@ public class OrganizationChainSvc {
             throw new ServiceException(messageBundle.getMsg(MessageLink.NAME_TAKEN));
         }
 
-        if (!organizationChain.getOrganizations().contains(organization)) {
-            organizationChain.addOrganization(organization);
+        if (organizationChain.getOrganizations().contains(organization)) {
+            throw new ServiceException(messageBundle.getMsg(MessageLink.ALREADY_EXISTS));
         }
+
+        organizationChain.addOrganization(organization);
 
         return chainRepo.save(organizationChain);
     }

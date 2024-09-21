@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -48,6 +50,23 @@ public class Organization {
     @JoinColumn(name = "chain_id")
     private OrganizationChain chain;
 
+    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
+    private Set<User> managers = new HashSet<>();
+
     private long createdAt;
+
+    public void addUser(User user) {
+        if (user != null && !managers.contains(user)) {
+            managers.add(user);
+            user.setOrganization(this);
+        }
+    }
+
+    public void removeUser(User user) {
+        if (user != null && managers.contains(user)) {
+            managers.remove(user);
+            user.setOrganization(null);
+        }
+    }
 
 }
