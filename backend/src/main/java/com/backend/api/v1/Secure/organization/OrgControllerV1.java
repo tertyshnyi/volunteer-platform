@@ -1,8 +1,12 @@
 package com.backend.api.v1.Secure.organization;
 
+import com.backend.exceptions.ServiceException;
+import com.backend.models.dto.OrganizationChainDTO;
 import com.backend.models.dto.OrganizationDTO;
+import com.backend.models.dto.UserDTO;
 import com.backend.models.dto.request.CreateOrgRegistrationRequest;
 import com.backend.models.entity.Organization;
+import com.backend.models.entity.OrganizationChain;
 import com.backend.models.enums.MessageLink;
 import com.backend.models.rest.RestResponseBody;
 import com.backend.models.rest.RestResponseEntity;
@@ -13,6 +17,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -94,6 +99,76 @@ public class OrgControllerV1 {
         } catch (EntityNotFoundException e) {
             return new RestResponseEntity<>(
                     new RestResponseBody<>(false, messageBundle.getMsg(MessageLink.NOT_FOUND), null),
+                    HttpStatus.NOT_FOUND
+            );
+        } catch (Exception e) {
+            return new RestResponseEntity<>(
+                    new RestResponseBody<>(false, e.getMessage(), null),
+                    HttpStatus.BAD_REQUEST
+            );
+        }
+    }
+
+    @GetMapping("/{organizationId}/managers")
+    public RestResponseEntity<List<UserDTO>> getUsersInOrg(@PathVariable UUID organizationId) {
+        try {
+            List<UserDTO> managers = organizationSvc.getUsersInOrg(organizationId);
+
+            return new RestResponseEntity<>(
+                    new RestResponseBody<>(true, null, managers),
+                    HttpStatus.OK
+            );
+        } catch (ServiceException e) {
+            return new RestResponseEntity<>(
+                    new RestResponseBody<>(false,  messageBundle.getMsg(MessageLink.NOT_FOUND), null),
+                    HttpStatus.NOT_FOUND
+            );
+        } catch (Exception e) {
+            return new RestResponseEntity<>(
+                    new RestResponseBody<>(false, e.getMessage(), null),
+                    HttpStatus.BAD_REQUEST
+            );
+        }
+    }
+
+    @PostMapping("/{organizationId}/managers/{managerId}")
+    public RestResponseEntity<OrganizationDTO> addUserToOrg(
+            @PathVariable UUID organizationId,
+            @PathVariable UUID managerId) {
+
+        try {
+            Organization updatedOrganization = organizationSvc.addUserInOrg(organizationId, managerId);
+            OrganizationDTO responseDto = new OrganizationDTO(updatedOrganization);
+
+            return new RestResponseEntity<>(
+                    new RestResponseBody<>(true, null, responseDto),
+                    HttpStatus.OK
+            );
+        } catch (ServiceException e) {
+            return new RestResponseEntity<>(
+                    new RestResponseBody<>(false, messageBundle.getMsg(MessageLink.NOT_FOUND), null),
+                    HttpStatus.NOT_FOUND
+            );
+        } catch (Exception e) {
+            return new RestResponseEntity<>(
+                    new RestResponseBody<>(false, e.getMessage(), null),
+                    HttpStatus.BAD_REQUEST
+            );
+        }
+    }
+
+    @DeleteMapping("/{organizationId}/managers/{managerId}")
+    public RestResponseEntity<Void> removeUserFromOrg(@PathVariable UUID organizationId, @PathVariable UUID managerId) {
+        try {
+            organizationSvc.removeUserFromOrg(organizationId, managerId);
+
+            return new RestResponseEntity<>(
+                    new RestResponseBody<>(true, null, null),
+                    HttpStatus.NO_CONTENT
+            );
+        } catch (ServiceException e) {
+            return new RestResponseEntity<>(
+                    new RestResponseBody<>(false,  messageBundle.getMsg(MessageLink.NOT_FOUND), null),
                     HttpStatus.NOT_FOUND
             );
         } catch (Exception e) {

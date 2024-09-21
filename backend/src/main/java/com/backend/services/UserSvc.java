@@ -49,7 +49,6 @@ public class UserSvc {
         user.setEmail(request.getEmail());
         user.setPassword(request.getPassword());
         user.setPhoneNumber(request.getPhoneNumber());
-        user.setUserRole(request.getUserRole());
         user.setCreatedAt(currentTime);
 
         return userRepo.save(user);
@@ -65,11 +64,8 @@ public class UserSvc {
 
         existingUser.setName(request.getName());
         existingUser.setSurname(request.getSurname());
-
         existingUser.setPassword(request.getPassword());
-
         existingUser.setPhoneNumber(request.getPhoneNumber());
-        existingUser.setUserRole(request.getUserRole());
         existingUser.setCreatedAt(System.currentTimeMillis());
 
         return userRepo.save(existingUser);

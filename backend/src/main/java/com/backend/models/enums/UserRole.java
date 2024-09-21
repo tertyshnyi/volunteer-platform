@@ -1,8 +1,11 @@
 package com.backend.models.enums;
 
 public enum UserRole {
-    OWNER("Owner organization"),
-    MANAGER("Manager organization");
+    OWNER("Owner"),
+    MANAGER("Manager"),
+    VOLUNTEER("Volunteer"),
+    ADMIN("Admin"),
+    GOD("God");
     private final String displayName;
 
     UserRole(String displayName) {

@@ -21,6 +21,9 @@ public class UserDTO implements Serializable {
     private String phoneNumber;
     private UserRole userRole;
     private long createdAt;
+
+    private UUID organizationId;
+
     public UserDTO(User user){
         this.id = user.getId();
         this.name = user.getName();
@@ -30,5 +33,9 @@ public class UserDTO implements Serializable {
         this.phoneNumber = user.getPhoneNumber();
         this.userRole = user.getUserRole();
         this.createdAt = user.getCreatedAt();
+
+        if (user.getOrganization() != null) {
+            this.organizationId = user.getOrganization().getId();
+        }
     }
 }

@@ -16,10 +16,8 @@ public class CreateUserRequest {
     private String email;
     private String password;
     private String phoneNumber;
-    private UserRole userRole;
 
     public boolean isComplete(){
-        return name != null && surname != null && email != null && password != null && phoneNumber != null
-                && userRole != null;
+        return name != null && surname != null && email != null && password != null && phoneNumber != null;
     }
 }
