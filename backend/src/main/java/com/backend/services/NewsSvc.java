@@ -38,9 +38,9 @@ public class NewsSvc {
             throw new ServiceException(messageBundle.getMsg(MessageLink.BAD_REQUEST));
         }
 
-        if (existByTitle(request.getTitle())) {
-            throw new ServiceException(messageBundle.getMsg(MessageLink.TITLE_TAKEN));
-        }
+//        if (existByTitle(request.getTitle())) {
+//            throw new ServiceException(messageBundle.getMsg(MessageLink.TITLE_TAKEN));
+//        }
 
         long currentTime = System.currentTimeMillis();
 
