@@ -1,6 +1,5 @@
-package com.backend.models.dto.request;
+package com.backend.models.rest.request;
 
-import com.backend.models.enums.UserRole;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +9,6 @@ import java.util.UUID;
 @Setter
 public class CreateUserRequest {
 
-    private UUID id;
     private String name;
     private String surname;
     private String email;

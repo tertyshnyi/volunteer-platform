@@ -1,4 +1,4 @@
-package com.backend.models.rest;
+package com.backend.models.rest.response;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

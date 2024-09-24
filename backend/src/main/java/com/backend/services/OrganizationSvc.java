@@ -3,12 +3,11 @@ package com.backend.services;
 import com.backend.exceptions.ServiceException;
 import com.backend.models.dto.OrganizationDTO;
 import com.backend.models.dto.UserDTO;
-import com.backend.models.dto.request.CreateOrgRegistrationRequest;
+import com.backend.models.enums.UserAuthority;
+import com.backend.models.rest.request.CreateOrgRegistrationRequest;
 import com.backend.models.entity.Organization;
-import com.backend.models.entity.OrganizationChain;
 import com.backend.models.entity.User;
 import com.backend.models.enums.MessageLink;
-import com.backend.models.enums.UserRole;
 import com.backend.repositories.OrganizationRepo;
 import com.backend.repositories.UserRepo;
 import com.backend.util.MessageBundle;
@@ -92,16 +91,12 @@ public class OrganizationSvc {
 
     public void delete(UUID id) throws ServiceException {
         try {
-
             Organization existingOrg = organizationRepo.findById(id)
                     .orElseThrow(() -> new ServiceException(messageBundle.getMsg(MessageLink.NOT_FOUND)));
 
             organizationRepo.deleteById(id);
-
         } catch (Exception e){
-
             throw new ServiceException(messageBundle.getMsg(MessageLink.NOT_FOUND));
-
         }
     }
 
@@ -131,7 +126,7 @@ public class OrganizationSvc {
 
         organization.addUser(user);
 
-        user.setUserRole(UserRole.MANAGER);
+        user.addAuthority(UserAuthority.MANAGER);
         user.setOrganization(organization);
         userRepo.save(user);
 
@@ -151,7 +146,8 @@ public class OrganizationSvc {
 
         organization.removeUser(user);
 
-        user.setUserRole(null);
+        user.removeAuthority(UserAuthority.MANAGER);
+        user.addAuthority(UserAuthority.USER);
         user.setOrganization(null);
 
         userRepo.save(user);

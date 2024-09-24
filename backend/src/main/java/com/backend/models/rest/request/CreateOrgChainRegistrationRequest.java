@@ -1,4 +1,4 @@
-package com.backend.models.dto.request;
+package com.backend.models.rest.request;
 
 import lombok.Getter;
 import lombok.Setter;
