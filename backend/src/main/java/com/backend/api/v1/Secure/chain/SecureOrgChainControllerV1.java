@@ -3,11 +3,11 @@ package com.backend.api.v1.Secure.chain;
 import com.backend.exceptions.ServiceException;
 import com.backend.models.dto.OrganizationChainDTO;
 import com.backend.models.dto.OrganizationDTO;
-import com.backend.models.dto.request.CreateOrgChainRegistrationRequest;
+import com.backend.models.rest.request.CreateOrgChainRegistrationRequest;
 import com.backend.models.entity.OrganizationChain;
 import com.backend.models.enums.MessageLink;
-import com.backend.models.rest.RestResponseBody;
-import com.backend.models.rest.RestResponseEntity;
+import com.backend.models.rest.response.RestResponseBody;
+import com.backend.models.rest.response.RestResponseEntity;
 import com.backend.services.OrganizationChainSvc;
 import com.backend.util.MessageBundle;
 import lombok.AllArgsConstructor;
@@ -20,7 +20,7 @@ import java.util.UUID;
 @RestController
 @AllArgsConstructor
 @RequestMapping("api/v1/secure/chain")
-public class OrgChainControllerV1 {
+public class SecureOrgChainControllerV1 {
 
     private final OrganizationChainSvc organizationChainSvc;
     private final MessageBundle messageBundle;

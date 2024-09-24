@@ -1,15 +1,13 @@
 package com.backend.api.v1.Secure.organization;
 
 import com.backend.exceptions.ServiceException;
-import com.backend.models.dto.OrganizationChainDTO;
 import com.backend.models.dto.OrganizationDTO;
 import com.backend.models.dto.UserDTO;
-import com.backend.models.dto.request.CreateOrgRegistrationRequest;
+import com.backend.models.rest.request.CreateOrgRegistrationRequest;
 import com.backend.models.entity.Organization;
-import com.backend.models.entity.OrganizationChain;
 import com.backend.models.enums.MessageLink;
-import com.backend.models.rest.RestResponseBody;
-import com.backend.models.rest.RestResponseEntity;
+import com.backend.models.rest.response.RestResponseBody;
+import com.backend.models.rest.response.RestResponseEntity;
 import com.backend.services.OrganizationSvc;
 import com.backend.util.MessageBundle;
 import jakarta.persistence.EntityNotFoundException;
@@ -23,7 +21,7 @@ import java.util.UUID;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/v1/secure/organization")
-public class OrgControllerV1 {
+public class SecureOrgControllerV1 {
 
     private final OrganizationSvc organizationSvc;
     private final MessageBundle messageBundle;

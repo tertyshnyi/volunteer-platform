@@ -2,15 +2,22 @@ package com.backend.services;
 
 import com.backend.exceptions.ServiceException;
 import com.backend.models.dto.UserDTO;
-import com.backend.models.dto.request.CreateUserRequest;
+import com.backend.models.entity.UserConfidential;
+import com.backend.models.rest.request.CreateLoginRequest;
+import com.backend.models.rest.request.CreateUserRequest;
 import com.backend.models.entity.User;
 import com.backend.models.enums.MessageLink;
 import com.backend.repositories.UserRepo;
+import com.backend.util.EmailValidator;
+import com.backend.util.JwtTokenUtil;
 import com.backend.util.MessageBundle;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Service
@@ -19,6 +26,12 @@ public class UserSvc {
 
     private final UserRepo userRepo;
     private final MessageBundle messageBundle;
+    private final JwtTokenUtil jwtTokenUtil;
+    private final RedisSvc redisSvc;
+
+    public final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(8);
+
+
     public boolean existsByEmail(String email) {
         return userRepo.existsByEmail(email);
     }
@@ -28,6 +41,20 @@ public class UserSvc {
             User user = userRepo.getById(id);
             return new UserDTO(user);
         } catch (EntityNotFoundException e) {
+            throw new ServiceException(messageBundle.getMsg(MessageLink.NOT_FOUND));
+        }
+    }
+
+    public UserDTO getByEmail(String email) throws ServiceException {
+        try {
+            User user = userRepo.findByEmail(email);
+
+            if (user == null) {
+                throw new ServiceException(messageBundle.getMsg(MessageLink.BAD_REQUEST));
+            }
+
+            return new UserDTO(user);
+        } catch (Exception e) {
             throw new ServiceException(messageBundle.getMsg(MessageLink.NOT_FOUND));
         }
     }
@@ -80,6 +107,31 @@ public class UserSvc {
 
         } catch (Exception e) {
             throw new ServiceException(messageBundle.getMsg(MessageLink.NOT_FOUND));
+        }
+    }
+
+    public UserConfidential getConfidentialUserById(UUID id) {
+        return userRepo.getUserConfidentialById(id);
+    }
+
+    public UserConfidential getConfidentialUserByEmail(String email) {
+        return userRepo.getUserConfidentialByEmail(email);
+    }
+
+    public String loginUser(CreateLoginRequest loginRequest) throws ServiceException {
+        if (loginRequest == null || !loginRequest.isComplete()) {
+            throw new ServiceException(messageBundle.getMsg(MessageLink.BAD_REQUEST));
+        }
+        User user;
+
+        user = userRepo.findByEmail(loginRequest.getEmailOrPhoneNumber());
+        if (user == null)
+            throw new ServiceException(messageBundle.getMsg(MessageLink.WRONG_LOGIN_EMAIL));
+
+        if (passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
+            return jwtTokenUtil.generateToken(user);
+        } else {
+            throw new ServiceException(messageBundle.getMsg(MessageLink.WRONG_LOGIN_PASSWORD));
         }
     }
 }
