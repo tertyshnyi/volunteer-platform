@@ -1,4 +1,4 @@
-package com.backend.api.v1.Public.accounts.auth;
+package com.backend.api.v1.Public.auth;
 
 import com.backend.exceptions.ServiceException;
 import com.backend.models.rest.request.CreateLoginRequest;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/api/v1/public/accounts/auth")
+@RequestMapping("/api/v1/public/auth")
 public class AuthControllerV1 {
     private final UserSvc userSvc;
 
