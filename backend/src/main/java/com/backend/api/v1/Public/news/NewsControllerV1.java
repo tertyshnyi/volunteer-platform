@@ -1,12 +1,11 @@
 package com.backend.api.v1.Public.news;
 
-import com.backend.exceptions.ServiceException;
 import com.backend.models.dto.NewsDTO;
-import com.backend.models.dto.request.CreateNewsRequest;
+import com.backend.models.rest.request.CreateNewsRequest;
 import com.backend.models.entity.News;
 import com.backend.models.enums.MessageLink;
-import com.backend.models.rest.RestResponseBody;
-import com.backend.models.rest.RestResponseEntity;
+import com.backend.models.rest.response.RestResponseBody;
+import com.backend.models.rest.response.RestResponseEntity;
 import com.backend.services.NewsSvc;
 import com.backend.util.MessageBundle;
 import jakarta.persistence.EntityNotFoundException;

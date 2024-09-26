@@ -1,4 +1,4 @@
-package com.backend.api.v1.Public.accounts.user;
+package com.backend.api.v1.Public.user;
 
 import com.backend.models.dto.UserConfidentialDTO;
 import com.backend.models.dto.UserDTO;

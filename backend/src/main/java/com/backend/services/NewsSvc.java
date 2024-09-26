@@ -2,7 +2,7 @@ package com.backend.services;
 
 import com.backend.exceptions.ServiceException;
 import com.backend.models.dto.NewsDTO;
-import com.backend.models.dto.request.CreateNewsRequest;
+import com.backend.models.rest.request.CreateNewsRequest;
 import com.backend.models.entity.News;
 import com.backend.models.enums.MessageLink;
 import com.backend.repositories.NewsRepo;

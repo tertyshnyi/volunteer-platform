@@ -64,6 +64,10 @@ public class UserSvc {
             throw new ServiceException(messageBundle.getMsg(MessageLink.BAD_REQUEST));
         }
 
+        if (!EmailValidator.validate(request.getEmail())) {
+            throw new ServiceException(messageBundle.getMsg(MessageLink.EMAIL_INCORRECT));
+        }
+
         if (existsByEmail(request.getEmail())) {
             throw new ServiceException(messageBundle.getMsg(MessageLink.EMAIL_TAKEN));
         }
@@ -74,7 +78,7 @@ public class UserSvc {
         user.setName(request.getName());
         user.setSurname(request.getSurname());
         user.setEmail(request.getEmail());
-        user.setPassword(request.getPassword());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setPhoneNumber(request.getPhoneNumber());
         user.setCreatedAt(currentTime);
 
