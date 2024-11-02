@@ -33,10 +33,12 @@ public class RedisSvc {
 //    }
 //
 //    public void saveUserConfidentialDto(UserConfidentialDTO user) {
-//        redisTemplate.opsForValue();
+//        if (user != null && user.getEmail() != null) {
+//            save(RedisKeyPrefix.USER_CONFIDENTIAL, user.getEmail(), user);
+//        }
 //    }
 //
 //    public void delete(RedisKeyPrefix prefix, String suffix) {
-//        redisTemplate.delete(prefix + suffix);
+//        redisTemplate.delete(prefix.getKey() + suffix);
 //    }
 }
