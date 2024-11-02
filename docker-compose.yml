@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - redis
+      - mysql
+    environment:
+      SPRING_APPLICATION_NAME: backend
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/volunteer_main
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: MySQL
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.MySQLDialect
+      JWT_SECRET_KEY: ieFqvQMYXpj+VLmk2j5XxLk1v1GyRbiF/XJTOeMN3xSrCKglYHYhfmIHnY0pk6g/UxvrNI9HiolMR2XxNbysTQ==
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - "6379:6379"
+
+  mysql:
+    image: mysql:latest
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: volunteer_main
+      MYSQL_ROOT_PASSWORD: MySQL
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+networks:
+  default:
+    name: volunteer
+
+volumes:
+  mysql_data:
