@@ -55,7 +55,7 @@ public class UserControllerV1 {
                 UserConfidentialDTO dto = new UserConfidentialDTO(user);
 //                redisSvc.save(RedisKeyPrefix.USER_DTO_BY_EMAIL, email, dto);
                 return new RestResponseEntity<>(
-                        new RestResponseBody<>(true, null, new UserConfidentialDTO(user)),
+                        new RestResponseBody<>(true, null, dto),
                         HttpStatus.OK
                 );
             } else {
