@@ -1,6 +1,6 @@
-import React from 'react'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Home from './pages/Home'
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from './pages/home/Home';
 
 const App: React.FC = () => {
 	return (
@@ -12,4 +12,4 @@ const App: React.FC = () => {
 	)
 }
 
-export default App
+export default App;
