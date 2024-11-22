@@ -9,6 +9,14 @@ import org.hibernate.annotations.GenericGenerator;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Entity representing a news article.
+ *
+ * This class maps to the "news" table in the database and contains details about a news article,
+ * including its title, content, creation timestamp, featured image, and additional images.
+ * The class is designed to be used in persistence operations (CRUD) and represents the structure
+ * of a news article as stored in the database.
+ */
 @Entity
 @Table(name = "news")
 @Getter

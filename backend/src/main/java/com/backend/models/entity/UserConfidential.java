@@ -9,6 +9,13 @@ import org.hibernate.annotations.GenericGenerator;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * Entity representing confidential user information.
+ *
+ * This class maps to the "user" table in the database and stores sensitive information related to a user.
+ * It contains the user's email, authorities (roles), last seen timestamp, online status, and security level.
+ * This entity is used for securely managing user credentials and access.
+ */
 @Getter
 @Setter
 @Entity

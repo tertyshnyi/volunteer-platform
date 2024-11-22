@@ -13,16 +13,35 @@ import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+/**
+ * Service class for handling news operations such as retrieving, creating, updating, and deleting news.
+ * The service interacts with the {@link NewsRepo} repository to perform database operations and with
+ * {@link MessageBundle} for retrieving localized error messages.
+ */
 @Service
 @AllArgsConstructor
 public class NewsSvc {
+
     private final NewsRepo newsRepo;
     private final MessageBundle messageBundle;
 
+    /**
+     * Check if a news article with the given title already exists in the database.
+     *
+     * @param title the title of the news article.
+     * @return {@code true} if a news article with the title exists, otherwise {@code false}.
+     */
     private boolean existByTitle(String title) {
         return newsRepo.existsByTitle(title);
     }
 
+    /**
+     * Retrieves a news article by its unique identifier.
+     *
+     * @param id the UUID of the news article.
+     * @return a {@link NewsDTO} containing news details.
+     * @throws ServiceException if the news article is not found.
+     */
     public NewsDTO getById(UUID id) throws ServiceException {
         try {
             News news = newsRepo.findById(id)
@@ -33,6 +52,13 @@ public class NewsSvc {
         }
     }
 
+    /**
+     * Creates a new news article and saves it to the database.
+     *
+     * @param request the {@link CreateNewsRequest} containing news details to be created.
+     * @return the created {@link News} entity.
+     * @throws ServiceException if the request is invalid or incomplete.
+     */
     public News create(CreateNewsRequest request) throws ServiceException {
         if (request == null || !request.isComplete()) {
             throw new ServiceException(messageBundle.getMsg(MessageLink.BAD_REQUEST));
@@ -54,6 +80,14 @@ public class NewsSvc {
         return newsRepo.save(news);
     }
 
+    /**
+     * Updates an existing news article by its ID.
+     *
+     * @param id      the UUID of the news article to be updated.
+     * @param request the {@link CreateNewsRequest} containing updated news details.
+     * @return the updated {@link News} entity.
+     * @throws ServiceException if the request is invalid or the news article is not found.
+     */
     public News update(UUID id, CreateNewsRequest request) throws ServiceException {
         if (request == null || !request.isComplete()) {
             throw new ServiceException(messageBundle.getMsg(MessageLink.BAD_REQUEST));
@@ -73,6 +107,12 @@ public class NewsSvc {
         return newsRepo.save(existingNews);
     }
 
+    /**
+     * Deletes a news article by its ID.
+     *
+     * @param id the UUID of the news article to be deleted.
+     * @throws ServiceException if the news article is not found or deletion fails.
+     */
     public void delete(UUID id) throws ServiceException {
         try {
             News existingNews = newsRepo.findById(id)

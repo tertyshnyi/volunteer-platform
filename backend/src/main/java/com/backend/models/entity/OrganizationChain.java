@@ -11,6 +11,13 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * Entity representing an organization chain.
+ *
+ * This class maps to the "organization_chain" table in the database and contains details about an organization chain,
+ * including its name and a set of organizations that belong to the chain.
+ * The entity defines a one-to-many relationship with the Organization entity and provides methods for adding and removing organizations.
+ */
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor

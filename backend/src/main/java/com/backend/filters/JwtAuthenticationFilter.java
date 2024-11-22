@@ -23,6 +23,18 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * JWT Authentication Filter for processing incoming requests and validating JWT tokens.
+ *
+ * This filter checks the incoming HTTP requests for a valid JWT token either in the
+ * "Authorization" header (as Bearer token) or in a cookie (with the key 'auth'). If the
+ * token is present and valid, the filter extracts the user ID and authenticates the user
+ * in the Spring Security context. If the token is invalid or missing, an error response
+ * is sent with an HTTP 401 Unauthorized status.
+ *
+ * The filter is applied to all requests except those listed in the {@link #EXCLUDED_PATHS}
+ * (such as public API paths or favicon requests).
+ */
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     public static final List<String> EXCLUDED_PATHS = List.of("/api/v1/public/**", "/favicon.ico");
@@ -34,11 +46,30 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final CustomUserDetailsSvc customUserDetailsSvc;
 
+    /**
+     * Constructor to inject dependencies for JWT token validation and user service.
+     *
+     * @param jwtTokenUtil utility class to handle JWT operations like extracting user ID and validation.
+     * @param customUserDetailsSvc service for loading user details by user ID.
+     */
     public JwtAuthenticationFilter(JwtTokenUtil jwtTokenUtil, CustomUserDetailsSvc customUserDetailsSvc) {
         this.jwtTokenUtil = jwtTokenUtil;
         this.customUserDetailsSvc = customUserDetailsSvc;
     }
 
+    /**
+     * Filters incoming requests to validate the JWT token.
+     *
+     * This method extracts the JWT token from the "Authorization" header or cookies,
+     * validates it, and then authenticates the user in the Spring Security context.
+     * If the token is invalid or missing, a 401 Unauthorized response is returned.
+     *
+     * @param request the HTTP request containing the JWT token.
+     * @param response the HTTP response to send back to the client.
+     * @param chain the filter chain to continue processing the request if the token is valid.
+     * @throws ServletException if the filter chain cannot process the request.
+     * @throws IOException if there is an error writing the response.
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
@@ -100,6 +131,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         chain.doFilter(request, response);
     }
 
+    /**
+     * Sends an error response to the client with the specified message.
+     *
+     * This method constructs a JSON response body containing the error message and sends
+     * it back to the client with a 401 Unauthorized status.
+     *
+     * @param response the HTTP response to send.
+     * @param message the error message to send in the response body.
+     * @throws IOException if there is an error writing the response.
+     */
     private void sendErrorResponse(HttpServletResponse response, String message) throws IOException {
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.setContentType("application/json");
@@ -110,6 +151,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         response.getWriter().flush();
     }
 
+    /**
+     * Determines whether this filter should be applied to the current request.
+     *
+     * This method checks if the request URI matches any of the excluded paths, in which case
+     * the filter will not be applied.
+     *
+     * @param request the HTTP request.
+     * @return true if the filter should not be applied, false otherwise.
+     * @throws ServletException if the filter cannot determine whether it should be applied.
+     */
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         String requestURI = request.getRequestURI();

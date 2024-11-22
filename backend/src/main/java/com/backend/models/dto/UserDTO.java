@@ -10,6 +10,13 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.UUID;
 
+/**
+ * Data Transfer Object (DTO) representing the details of a user.
+ *
+ * This DTO is used for transferring user data, including the user's personal information,
+ * organizational affiliation, and roles (authorities). It is typically used for providing user details
+ * in API responses, particularly in cases where user data needs to be exposed to authenticated or authorized users.
+ */
 @Getter
 @Setter
 @NoArgsConstructor

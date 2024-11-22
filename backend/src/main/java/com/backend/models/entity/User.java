@@ -22,6 +22,13 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 
+/**
+ * Entity representing a user in the system.
+ *
+ * This class maps to the "users" table in the database and contains details about a user, including their name, email,
+ * password, phone number, and authorities (roles). It implements the `UserDetails` interface to integrate with Spring Security.
+ * The entity also defines a relationship with the `Organization` entity to represent the user's organization.
+ */
 public class User implements UserDetails {
     @Id
     @GeneratedValue(generator = "hibernate-uuid")

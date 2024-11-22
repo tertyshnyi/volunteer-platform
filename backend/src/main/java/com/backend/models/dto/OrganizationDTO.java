@@ -11,6 +11,13 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+/**
+ * Data Transfer Object (DTO) for representing an organization.
+ *
+ * This class is used to transfer data about an organization between different layers of the application,
+ * such as from the service layer to the controller or to the client. It contains basic information about the
+ * organization including its ID, name, contact details, and associated managers.
+ */
 @Getter
 @Setter
 @NoArgsConstructor

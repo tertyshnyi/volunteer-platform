@@ -23,6 +23,16 @@ public class NewsControllerV1 {
     private final NewsSvc newsSvc;
     private final MessageBundle messageBundle;
 
+    /**
+     * Get news by its ID.
+     *
+     * This method retrieves a single news item based on its unique identifier (UUID).
+     * If the news item is found, it returns the news details in a `NewsDTO` format with a 200 OK status.
+     * If not found, it returns a 404 NOT_FOUND status with an appropriate message.
+     *
+     * @param id the UUID of the news item to fetch.
+     * @return ResponseEntity containing the news details or error message with corresponding HTTP status.
+     */
     @GetMapping("/{id}")
     public RestResponseEntity<NewsDTO> getNewsById(@PathVariable UUID id) {
         try {
@@ -44,6 +54,16 @@ public class NewsControllerV1 {
         }
     }
 
+    /**
+     * Create a new news entry.
+     *
+     * This method handles the creation of a new news item based on the provided request body (`CreateNewsRequest`).
+     * If successful, it returns the created news with a 201 CREATED status.
+     * In case of an error (e.g., validation failure), a 400 BAD_REQUEST status is returned.
+     *
+     * @param request the data required to create the news item.
+     * @return ResponseEntity containing the created news or error message with corresponding HTTP status.
+     */
     @PostMapping
     public RestResponseEntity<News> createNews(@RequestBody CreateNewsRequest request){
         try {
@@ -60,6 +80,17 @@ public class NewsControllerV1 {
         }
     }
 
+    /**
+     * Update an existing news entry.
+     *
+     * This method allows updating an existing news item based on its ID and the provided `CreateNewsRequest`.
+     * If successful, it returns the updated news item with a 200 OK status.
+     * If the news item does not exist, a 404 NOT_FOUND status is returned.
+     *
+     * @param id the UUID of the news item to update.
+     * @param request the data to update the news item.
+     * @return ResponseEntity containing the updated news or error message with corresponding HTTP status.
+     */
     @PutMapping("/{id}")
     public RestResponseEntity<News> updateNews(@PathVariable UUID id, @RequestBody CreateNewsRequest request){
         try {
@@ -81,6 +112,16 @@ public class NewsControllerV1 {
         }
     }
 
+    /**
+     * Delete a news entry by its ID.
+     *
+     * This method deletes an existing news item identified by the provided ID.
+     * If the news item exists and is successfully deleted, it returns a 204 NO_CONTENT status.
+     * If the news item is not found, a 404 NOT_FOUND status is returned.
+     *
+     * @param id the UUID of the news item to delete.
+     * @return ResponseEntity with 204 NO_CONTENT status if successful or error message with corresponding HTTP status.
+     */
     @DeleteMapping("/{id}")
     public RestResponseEntity<Void> deleteNews(@PathVariable UUID id) {
         try {
