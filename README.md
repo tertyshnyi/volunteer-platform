@@ -18,7 +18,7 @@ Volunteer Platform is a web-based application designed to connect volunteers wit
 - **Java 17**: Leveraging the modern features and improved performance of Java 17.
 - **Spring Boot**: Simplifies development and deployment of REST APIs.
 - **Maven**: Dependency management and build automation.
-- **PostgreSQL**: Relational database for storing application data.
+- **MySQL**: Relational database for storing application data.
 - **Redis**: In-memory data store for caching and session management.
 - **Apache Kafka**: Distributed event streaming for asynchronous communication.
 - **Docker**: Containerized deployment for consistency across environments.
@@ -112,9 +112,13 @@ Ensure that **Docker** and **Docker Compose** are installed on your system.
    ```
 
 2. **Access the services:**
+   
    Backend API: http://localhost:8080
+   
    Frontend: http://localhost:3000
+   
    Redis: http://localhost:6379
+   
    MySQL: http://localhost:3307
 
 ## API Documentation
