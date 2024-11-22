@@ -32,6 +32,18 @@ public class SecureUserControllerV1 {
     private final JwtTokenUtil jwtTokenUtil;
     private final RedisSvc redisSvc;
 
+    /**
+     * Updates the details of an existing user.
+     *
+     * This method accepts a `CreateUserRequest` to update the user's details identified by `id`.
+     * If successful, it returns the updated user with a `200 OK` status.
+     * If the user is not found, it returns a `404 Not Found` response.
+     * In case of any other error, it returns a `400 Bad Request` response.
+     *
+     * @param id the ID of the user to update.
+     * @param request the request body containing the updated user details.
+     * @return a response entity with the updated user or an error message.
+     */
     @PutMapping("/{id}")
     public RestResponseEntity<User> updateUser(@PathVariable UUID id, @RequestBody CreateUserRequest request){
         try {
@@ -53,6 +65,18 @@ public class SecureUserControllerV1 {
         }
     }
 
+
+    /**
+     * Deletes a user by their ID.
+     *
+     * This method deletes the user identified by `id`.
+     * If successful, it returns a `204 No Content` response.
+     * If the user is not found, it returns a `404 Not Found` response.
+     * In case of any other error, it returns a `400 Bad Request` response.
+     *
+     * @param id the ID of the user to delete.
+     * @return a response entity indicating success or failure.
+     */
     @DeleteMapping("/{id}")
     public RestResponseEntity<Void> deleteUser(@PathVariable UUID id) {
         try {
@@ -76,6 +100,20 @@ public class SecureUserControllerV1 {
         }
     }
 
+    /**
+     * Retrieves the details of the currently authenticated user.
+     *
+     * This method extracts the JWT token from the request (either from cookies or the Authorization header).
+     * It validates the token and retrieves the user ID. If the token is invalid or the user ID cannot be found,
+     * it returns an `401 Unauthorized` response.
+     *
+     * If the token is valid, it fetches the user details from the `UserSvc` service, and if found, returns a `200 OK`
+     * response with the user details in the form of a `UserConfidentialDTO`. Optionally, this information could be
+     * cached using Redis to improve performance.
+     *
+     * @param httpServletRequest the HTTP request containing the JWT token.
+     * @return a response entity with the user details or an error message.
+     */
     @GetMapping("/me")
     public RestResponseEntity<UserConfidentialDTO> getUser(HttpServletRequest httpServletRequest) {
         String jwtToken = CookieExtractor.extractValue(httpServletRequest.getCookies(), JwtTokenUtil.JWT_COOKIE_KEY);

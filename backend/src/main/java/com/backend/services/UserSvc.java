@@ -21,6 +21,13 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.UUID;
 
+/**
+ * Service class that handles user-related operations, including
+ * creation, update, deletion, authentication, and retrieval of user information.
+ * It interacts with the repository to persist or fetch user data from the database
+ * and provides additional features like password encryption and JWT token generation.
+ * The class also manages user confidential data retrieval.
+ */
 @Service
 @AllArgsConstructor
 public class UserSvc {
@@ -32,11 +39,23 @@ public class UserSvc {
 
     public final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(8);
 
-
+    /**
+     * Checks if a user exists in the repository by their email.
+     *
+     * @param email the email to search for.
+     * @return true if the user exists, false otherwise.
+     */
     public boolean existsByEmail(String email) {
         return userRepo.existsByEmail(email);
     }
 
+    /**
+     * Retrieves a user by their unique ID and returns a UserDTO.
+     *
+     * @param id the UUID of the user.
+     * @return the UserDTO object corresponding to the user ID.
+     * @throws ServiceException if the user cannot be found.
+     */
     public UserDTO getById(UUID id) throws ServiceException {
         try {
             User user = userRepo.getById(id);
@@ -46,6 +65,13 @@ public class UserSvc {
         }
     }
 
+    /**
+     * Retrieves a user by their email and returns a UserDTO.
+     *
+     * @param email the email of the user.
+     * @return the UserDTO object corresponding to the email.
+     * @throws ServiceException if the user cannot be found or email is invalid.
+     */
     public UserDTO getByEmail(String email) throws ServiceException {
         try {
             User user = userRepo.findByEmail(email);
@@ -60,6 +86,13 @@ public class UserSvc {
         }
     }
 
+    /**
+     * Creates a new user based on the provided CreateUserRequest.
+     *
+     * @param request the request containing user information.
+     * @return the newly created User object.
+     * @throws ServiceException if the request is invalid or email is already taken.
+     */
     public User create(CreateUserRequest request) throws ServiceException {
         if (request == null || !request.isComplete()) {
             throw new ServiceException(messageBundle.getMsg(MessageLink.BAD_REQUEST));
@@ -86,6 +119,14 @@ public class UserSvc {
         return userRepo.save(user);
     }
 
+    /**
+     * Updates an existing user based on the provided UUID and CreateUserRequest.
+     *
+     * @param id the UUID of the user to update.
+     * @param request the request containing the updated user information.
+     * @return the updated User object.
+     * @throws ServiceException if the user cannot be found or email is changed.
+     */
     public User update(UUID id, CreateUserRequest request) throws ServiceException {
         User existingUser = userRepo.findById(id)
                 .orElseThrow(() -> new ServiceException(messageBundle.getMsg(MessageLink.NOT_FOUND)));
@@ -103,6 +144,12 @@ public class UserSvc {
         return userRepo.save(existingUser);
     }
 
+    /**
+     * Deletes a user by their UUID.
+     *
+     * @param id the UUID of the user to delete.
+     * @throws ServiceException if the user cannot be found.
+     */
     public void delete(UUID id) throws ServiceException {
         try {
             User existingUser = userRepo.findById(id)
@@ -115,14 +162,33 @@ public class UserSvc {
         }
     }
 
+    /**
+     * Retrieves confidential information for a user by their unique ID.
+     *
+     * @param id the UUID of the user.
+     * @return the UserConfidential object associated with the user ID.
+     */
     public UserConfidential getConfidentialUserById(UUID id) {
         return userRepo.getUserConfidentialById(id);
     }
 
+    /**
+     * Retrieves confidential information for a user by their email.
+     *
+     * @param email the email of the user.
+     * @return the UserConfidential object associated with the user's email.
+     */
     public UserConfidential getConfidentialUserByEmail(String email) {
         return userRepo.getUserConfidentialByEmail(email);
     }
 
+    /**
+     * Authenticates a user based on their login credentials.
+     *
+     * @param loginRequest the login request containing email/phone number and password.
+     * @return a JWT token if the login is successful.
+     * @throws ServiceException if the login credentials are incorrect.
+     */
     public String loginUser(CreateLoginRequest loginRequest) throws ServiceException {
         if (loginRequest == null || !loginRequest.isComplete()) {
             throw new ServiceException(messageBundle.getMsg(MessageLink.BAD_REQUEST));

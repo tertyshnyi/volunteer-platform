@@ -1,5 +1,14 @@
 package com.backend.models.enums;
 
+/**
+ * Enum representing various types of messages or error codes.
+ *
+ * This enum contains predefined constants that are used to define error messages, status codes, and other
+ * related messages in the application. Each constant corresponds to a specific scenario such as a bad request,
+ * an invalid email or password, permission issues, or internal system errors.
+ * These messages are useful for providing consistent feedback to the user and for handling exceptions
+ * throughout the application.
+ */
 public enum MessageLink {
     BAD_REQUEST,
     NOT_FOUND,

@@ -11,6 +11,15 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+
+/**
+ * Entity representing an organization.
+ *
+ * This class maps to the "organization" table in the database and contains details about an organization,
+ * including its name, address, managers, associated chain, and creation timestamp.
+ * The entity is used in persistence operations (CRUD) and defines relationships with other entities such as users
+ * and organization chains.
+ */
 @Entity
 @Table(name="organization")
 @Getter

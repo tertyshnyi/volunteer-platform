@@ -13,10 +13,25 @@ public class MessageBundle {
         this.messageSource = messageSource;
     }
 
+    /**
+     * Retrieves the message associated with the provided message link.
+     * The message is automatically localized based on the current locale.
+     *
+     * @param messageLink The enum representing the message to fetch.
+     * @return The localized message string.
+     */
     public String getMsg(MessageLink messageLink) {
         return messageSource.getMessage(messageLink.name(), null, LocaleContextHolder.getLocale());
     }
 
+    /**
+     * Retrieves the message associated with the provided message link,
+     * and replaces the placeholder {0} with the provided number.
+     *
+     * @param messageLink The enum representing the message to fetch.
+     * @param number The number to replace in the message.
+     * @return The localized message with the number inserted into the placeholder.
+     */
     public String getMsg(MessageLink messageLink, int number) {
         return messageSource.getMessage(messageLink.name(), null, LocaleContextHolder.getLocale()).replace("{0}", String.valueOf(number));
     }

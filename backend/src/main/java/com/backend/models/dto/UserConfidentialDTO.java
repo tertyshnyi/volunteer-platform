@@ -10,6 +10,13 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+/**
+ * Data Transfer Object (DTO) representing confidential details of a user.
+ *
+ * This class is used to transfer detailed information about a user, such as their email, authorities (roles),
+ * last seen time, online status, and user level. It is typically used when exposing confidential user data
+ * in API responses, especially for authenticated and authorized users.
+ */
 @NoArgsConstructor
 @Getter
 @Setter

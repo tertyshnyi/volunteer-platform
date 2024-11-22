@@ -28,6 +28,19 @@ public class UserControllerV1 {
     private final MessageBundle messageBundle;
     private final RedisSvc redisSvc;
 
+    /**
+     * Fetches the user information based on email or ID.
+     *
+     * This method allows the client to request user details using either the user's email or ID.
+     * If both parameters are missing or empty, it returns a `400 Bad Request` response.
+     *
+     * If the user data exists in the Redis cache, it will be fetched from there to optimize response times.
+     * If not, it will query the database for the user's confidential information.
+     *
+     * @param email the email of the user (optional)
+     * @param id the ID of the user (optional)
+     * @return a response entity with the user data if found, or an error message.
+     */
     @GetMapping
     public RestResponseEntity<UserConfidentialDTO> getUser(
             @RequestParam(name="email", required = false) String email,
@@ -72,6 +85,16 @@ public class UserControllerV1 {
         }
     }
 
+    /**
+     * Creates a new user.
+     *
+     * This method accepts a request body containing the details of the user to be created and passes it to the service layer.
+     * If the user creation is successful, it returns a `201 Created` response with the newly created user.
+     * In case of any errors, it returns a `400 Bad Request` response with the error message.
+     *
+     * @param request the user creation request containing user details.
+     * @return a response entity with the created user or an error message.
+     */
     @PostMapping
     public RestResponseEntity<User> createUser(@RequestBody CreateUserRequest request){
         try {

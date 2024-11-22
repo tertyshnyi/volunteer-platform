@@ -19,6 +19,10 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+/**
+ * Service class for managing organizations, including creating, updating, deleting organizations,
+ * adding/removing users, and fetching organization-related details.
+ */
 @Service
 @AllArgsConstructor
 public class OrganizationSvc {
@@ -27,10 +31,23 @@ public class OrganizationSvc {
     private final MessageBundle messageBundle;
     private final UserRepo userRepo;
 
+    /**
+     * Checks if an organization with the specified name already exists.
+     *
+     * @param name the name of the organization to check.
+     * @return true if the organization exists, false otherwise.
+     */
     public boolean existsByName(String name) {
         return organizationRepo.existsByName(name);
     }
 
+    /**
+     * Retrieves an organization by its ID.
+     *
+     * @param id the UUID of the organization.
+     * @return an {@link OrganizationDTO} object representing the organization.
+     * @throws ServiceException if the organization is not found.
+     */
     public OrganizationDTO getById(UUID id) throws ServiceException {
         try {
             Organization organization = organizationRepo.getById(id);
@@ -40,6 +57,13 @@ public class OrganizationSvc {
         }
     }
 
+    /**
+     * Creates a new organization with the provided details.
+     *
+     * @param request the request object containing organization details.
+     * @return the created {@link Organization} entity.
+     * @throws ServiceException if the request is incomplete or the organization name is already taken.
+     */
     public Organization create(CreateOrgRegistrationRequest request) throws ServiceException {
         if (request == null || !request.isComplete()){
             throw new ServiceException(messageBundle.getMsg(MessageLink.BAD_REQUEST));
@@ -64,6 +88,14 @@ public class OrganizationSvc {
         return organizationRepo.save(organization);
     }
 
+    /**
+     * Updates an existing organization with the provided details.
+     *
+     * @param id the UUID of the organization to update.
+     * @param request the request object containing the new organization details.
+     * @return the updated {@link Organization} entity.
+     * @throws ServiceException if the request is incomplete, the organization is not found, or the name is being changed.
+     */
     public Organization update(UUID id, CreateOrgRegistrationRequest request) throws ServiceException {
         if (request == null || !request.isComplete()){
             throw new ServiceException(messageBundle.getMsg(MessageLink.BAD_REQUEST));
@@ -89,6 +121,12 @@ public class OrganizationSvc {
         return organizationRepo.save(existingOrg);
     }
 
+    /**
+     * Deletes an organization by its ID.
+     *
+     * @param id the UUID of the organization to delete.
+     * @throws ServiceException if the organization is not found.
+     */
     public void delete(UUID id) throws ServiceException {
         try {
             Organization existingOrg = organizationRepo.findById(id)
@@ -100,6 +138,13 @@ public class OrganizationSvc {
         }
     }
 
+    /**
+     * Retrieves a list of users associated with a given organization.
+     *
+     * @param organizationId the UUID of the organization.
+     * @return a list of {@link UserDTO} objects representing the users in the organization.
+     * @throws ServiceException if the organization is not found.
+     */
     public List<UserDTO> getUsersInOrg(UUID organizationId) throws ServiceException {
         Organization organization = organizationRepo.findById(organizationId)
                 .orElseThrow(() -> new ServiceException(messageBundle.getMsg(MessageLink.NOT_FOUND)));
@@ -109,6 +154,16 @@ public class OrganizationSvc {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Adds a user to an organization, assigning them the manager role.
+     *
+     * @param organizationId the UUID of the organization.
+     * @param userId the UUID of the user to add.
+     * @return the updated {@link Organization} entity.
+     * @throws ServiceException if the organization or user is not found,
+     *                          the user is already assigned to a different organization,
+     *                          or the user is already part of the organization.
+     */
     public Organization addUserInOrg(UUID organizationId, UUID userId) throws ServiceException {
         Organization organization = organizationRepo.findById(organizationId)
                 .orElseThrow(() -> new ServiceException(messageBundle.getMsg(MessageLink.NOT_FOUND)));
@@ -133,6 +188,14 @@ public class OrganizationSvc {
         return organizationRepo.save(organization);
     }
 
+    /**
+     * Removes a user from an organization, downgrading their role from manager to user.
+     *
+     * @param organizationId the UUID of the organization.
+     * @param userId the UUID of the user to remove.
+     * @throws ServiceException if the organization or user is not found,
+     *                          or the user is not part of the specified organization.
+     */
     public void removeUserFromOrg(UUID organizationId, UUID userId) throws ServiceException {
         Organization organization = organizationRepo.findById(organizationId)
                 .orElseThrow(() -> new ServiceException(messageBundle.getMsg(MessageLink.NOT_FOUND)));
