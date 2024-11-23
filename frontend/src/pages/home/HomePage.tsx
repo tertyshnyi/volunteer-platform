@@ -3,8 +3,6 @@ import React from 'react';
 const HomePage: React.FC = () => {
     return (
         <div>
-            <h1>Welcome to Volunteer Platform</h1>
-            <p>Explore volunteer opportunities below.</p>
         </div>
     )
 }
