@@ -1,0 +1,19 @@
+.section {
+    flex: 15%;
+}
+
+.section .logo {
+    width: 200px;
+    height: 80px;
+}
+
+.section .description {
+    margin-top: -15px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.section .description a {
+    color: #282c34;
+    text-decoration: none;
+}
