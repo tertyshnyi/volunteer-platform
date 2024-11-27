@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import ProtectedRoutes from "./ProtectedRoutes";
 import AuthRoutes from "./AuthRoutes";
@@ -25,7 +25,7 @@ const AppRouter: React.FC = () => {
     const isAuthenticated = !!localStorage.getItem("authToken");
 
     return (
-        <BrowserRouter>
+        <>
             <Navbar />
             <Routes>
                 {/* Public routes */}
@@ -52,7 +52,7 @@ const AppRouter: React.FC = () => {
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
             <Footer />
-        </BrowserRouter>
+        </>
     );
 };
 
