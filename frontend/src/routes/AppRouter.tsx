@@ -1,9 +1,12 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import ProtectedRoutes from "./ProtectedRoutes";
 import AuthRoutes from "./AuthRoutes";
 import { routesConfig } from "./routesConfig";
+
+import Navbar from "../components/navbar/Navbar";
+import Footer from "../components/footer/Footer";
 
 import HomePage from "../pages/home/HomePage";
 import NotFoundPage from "../pages/404/NotFoundPage";
@@ -11,13 +14,10 @@ import NotFoundPage from "../pages/404/NotFoundPage";
 import LoginPage from "../features/auth/pages/LoginPage";
 import RegisterPage from "../features/auth/pages/RegisterPage";
 import ResetPasswordPage from "../features/auth/pages/ResetPasswordPage";
-
 import NewsListPage from "../features/news/pages/NewsListPage";
 import NewsDetailsPage from "../features/news/pages/NewsDetailsPage";
-
 import DeliveryListPage from "../features/deliveries/pages/DeliveryListPage";
 import DeliveryDetailsPage from "../features/deliveries/pages/DeliveryDetailsPage";
-
 import VolunteerListPage from "../features/volunteers/pages/VolunteerListPage";
 import VolunteerDetailsPage from "../features/volunteers/pages/VolunteerDetailsPage";
 
@@ -25,7 +25,8 @@ const AppRouter: React.FC = () => {
     const isAuthenticated = !!localStorage.getItem("authToken");
 
     return (
-        <BrowserRouter>
+        <>
+            <Navbar />
             <Routes>
                 {/* Public routes */}
                 <Route path={routesConfig.home} element={<HomePage />} />
@@ -50,7 +51,8 @@ const AppRouter: React.FC = () => {
                 {/* Page 404 */}
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
-        </BrowserRouter>
+            <Footer />
+        </>
     );
 };
 

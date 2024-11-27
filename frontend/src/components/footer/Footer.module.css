@@ -1,5 +1,5 @@
 .footer {
-    background-color: #f8f9fa;
+    /*background-color: #f8f9fa;*/
     border-top: 1px solid #ddd;
     padding: 10px 30px;
     position: relative;
@@ -12,12 +12,14 @@
     gap: 40px;
     min-height: 380px;
     z-index: 0;
+    flex-direction: row;
+    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0.1, 0.2));
 }
 
-@media (max-width: 1000px) {
-}
-
-@media (max-width: 600px) {
+@media (max-width: 960px) {
+    .footer {
+        flex-direction: column-reverse;
+    }
 }
 
 @media (max-width: 440px) {
