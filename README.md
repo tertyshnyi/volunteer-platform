@@ -97,7 +97,7 @@ The backend will be available at `http://localhost:8080`.
    npm start
    ``` 
 
-The frontend will now be accessible at http://localhost:3000.
+The frontend will now be accessible at `http://localhost:3000`.
 
 ## **Running the Project with Docker**
 
@@ -113,13 +113,13 @@ Ensure that **Docker** and **Docker Compose** are installed on your system.
 
 2. **Access the services:**
    
-   Backend API: http://localhost:8080
+   Backend API: `http://localhost:8080`
    
-   Frontend: http://localhost:3000
+   Frontend: `http://localhost:3000`
    
-   Redis: http://localhost:6379
+   Redis: `http://localhost:6379`
    
-   MySQL: http://localhost:3307
+   MySQL: `http://localhost:3307`
 
 ## API Documentation
 To view the API documentation, ensure the backend is running and open the Swagger UI at: http://localhost:8080/swagger-ui.html (if Swagger is configured).
