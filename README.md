@@ -122,7 +122,7 @@ Ensure that **Docker** and **Docker Compose** are installed on your system.
    MySQL: `http://localhost:3307`
 
 ## API Documentation
-To view the API documentation, ensure the backend is running and open the Swagger UI at: http://localhost:8080/swagger-ui.html (if Swagger is configured).
+To view the API documentation, ensure the backend is running and open the Swagger UI at: `http://localhost:8080/swagger-ui.html` (if Swagger is configured).
 
 ## Contribution
 Contributions are welcome! Follow these steps to contribute:
