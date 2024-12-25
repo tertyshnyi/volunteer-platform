@@ -30,6 +30,7 @@ const AppRouter: React.FC = () => {
             <Routes>
                 {/* Public routes */}
                 <Route path={routesConfig.home} element={<HomePage />} />
+                <Route path={routesConfig.news} element={<NewsListPage />} />
 
                 {/* Restricting access for authorized users */}
                 <Route element={<AuthRoutes isAuthenticated={isAuthenticated} />}>
@@ -40,7 +41,6 @@ const AppRouter: React.FC = () => {
 
                 {/* Protected routes */}
                 <Route element={<ProtectedRoutes isAuthenticated={isAuthenticated} />}>
-                    <Route path={routesConfig.news} element={<NewsListPage />} />
                     <Route path={routesConfig.newsDetails} element={<NewsDetailsPage />} />
                     <Route path={routesConfig.deliveries} element={<DeliveryListPage />} />
                     <Route path={routesConfig.deliveryDetails} element={<DeliveryDetailsPage />} />

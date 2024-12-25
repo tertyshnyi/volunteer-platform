@@ -15,46 +15,64 @@ const LoginPage: React.FC = () => {
             <div className={styles.login}>
                 <div className={styles.left}>
                     <h1 className={styles.title}>Welcome back.</h1>
-                    <p className={styles.subtitle}>We're glad to see you again! Please enter your login details
-                        to access your account and continue where you left off.
+                    <p className={styles.subtitle}>
+                        We are happy to see you again! Please enter your login details
+                        to access your account and pick up where you left off so that
+                        there are fewer hungry people in the world!
                     </p>
                 </div>
                 <div className={styles.right}>
                     <h1 className={styles.title}>Sign in.</h1>
-                    <div className={styles.form}>
-                        <label className={styles.label}>
-                            <input type="email" className={styles.input} placeholder="Email*" />
-                        </label>
+                    <div className={styles.context}>
+                        <div className={styles.form}>
+                            <label className={styles.label}>
+                                <input type="email" className={styles.input} placeholder="Email*"/>
+                            </label>
 
-                        <br/>
-                        <label className={styles.label}>
-                            <input type="tel" className={styles.input} placeholder="Phone number*" />
-                        </label>
+                            <label className={styles.label}>
+                                <input type="tel" className={styles.input} placeholder="Phone number*"/>
+                            </label>
 
-                        <br/>
-                        <label className={styles.label}>
-                            <input type="password" className={styles.input} placeholder="Password*" />
-                        </label>
+                            <label className={styles.label}>
+                                <input type="password" className={styles.input} placeholder="Password*"/>
+                            </label>
 
-                        <br/>
-                        <label className={styles.checkboxLabel}>
-                            <input type="checkbox" className={styles.checkbox}/>
-                            <span className={styles.checkboxText}>Remember me</span>
-                        </label>
+                            <div className={styles.buttons}>
+                                <label className={styles.checkboxLabel}>
+                                    <input type="checkbox" className={styles.checkbox}/>
+                                    <span className={styles.checkboxText}>Remember me</span>
+                                </label>
 
-                        <br/>
-                        <a href={routesConfig.resetPassword} className={styles.resetPass}>
-                            Forgot password?
-                        </a>
+                                <a href={routesConfig.resetPassword} className={styles.resetPass}>
+                                    <span>Forgot password?</span>
+                                </a>
+                            </div>
+                        </div>
 
-                        <br/>
                         <button type="submit" className={styles.button}>Sign in now</button>
 
-                        {/*<p>or</p>*/}
+                        <div className={styles.social_login}>
+                            <a className={styles.logo} href="#">
+                                <img
+                                    src="https://images.rawpixel.com/image_png_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjk4Mi1kNS0xMF8xLnBuZw.png"
+                                    alt="Linkedin"/>
+                            </a>
+                            <a className={styles.logo} href="#">
+                                <img
+                                    src="https://image.similarpng.com/very-thumbnail/2020/06/Logo-google-icon-PNG.png"
+                                    alt="Google"/>
+                            </a>
+                            <a className={styles.logo} href="#">
+                                <img
+                                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png"
+                                    alt="Facebook"/>
+                            </a>
+                        </div>
 
-                        {/*<a className={styles.logo} href="#">*/}
-                        {/*    <img src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png" alt="Google" />*/}
-                        {/*</a>*/}
+                        <p className={styles.register}>
+                            Don't have an account?
+                            <a href="#">Register</a>
+                        </p>
 
                         <p className={styles.desc}>
                             By clicking on "Sign in now" you agree to <br/>

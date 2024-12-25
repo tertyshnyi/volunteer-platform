@@ -42,7 +42,7 @@
 }
 
 .container .login .left .subtitle {
-    font-size: small;
+    font-size: 12px;
 }
 
 .container .login .right {
@@ -59,20 +59,22 @@
     justify-content: center;
 }
 
-.container .login .right .form {
+.container .login .right .context {
     display: flex;
     flex-direction: column;
-    align-items: center;
     text-align: center;
-    padding: 0 20px 0 0;
+    margin: 0 50px 0 50px;
 }
 
-.container .login .right .form .label {
-    width: 70%;
+.container .login .right .context .form {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
 }
 
-.container .login .right .form .label .input {
-    width: 100%;
+.container .login .right .context .form .label .input {
+    width: 92%;
     padding: 10px;
     font-size: 16px;
     border: none;
@@ -83,24 +85,32 @@
     transition: border-color 0.3s ease;
 }
 
-.container .login .right .form .label .input:focus {
+.container .login .right .context .form .label .input:focus {
     border-bottom-color: #3d3d3d;
     box-shadow: 0 2px 5px rgba(14, 14, 14, 0.5);
 }
 
-.container .login .right .form .label .input::placeholder {
+.container .login .right .context .form .label .input::placeholder {
     color: #aaa;
     font-size: 14px;
 }
 
-.container .login .right .form .checkboxLabel {
+.container .login .right .context .form .buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.container .login .right .context .form .buttons .checkboxLabel {
     display: flex;
     align-items: center;
     gap: 10px;
     cursor: pointer;
 }
 
-.container .login .right .form .checkboxLabel .checkbox {
+.container .login .right .context .form .buttons .checkboxLabel .checkbox {
     appearance: none;
     width: 20px;
     height: 20px;
@@ -111,12 +121,12 @@
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-.container .login .right .form .checkboxLabel .checkbox:checked {
+.container .login .right .context .form .buttons .checkboxLabel .checkbox:checked {
     background-color: #000000;
     border-color: #0a0a0a;
 }
 
-.container .login .right .form .checkboxLabel .checkbox:checked::after {
+.container .login .right .context .form .buttons .checkboxLabel .checkbox:checked::after {
     content: '';
     position: absolute;
     top: 2px;
@@ -128,20 +138,23 @@
     transform: rotate(45deg);
 }
 
-.container .login .right .form .checkboxLabel .checkbox:hover {
+.container .login .right .context .form .buttons .checkboxLabel .checkbox:hover {
     border-color: #000000;
 }
 
-.container .login .right .form .checkboxLabel .checkboxText {
+.container .login .right .context .form .buttons .checkboxLabel .checkboxText {
     user-select: none;
 }
 
-.container .login .right .form .resetPass {
-    text-decoration: none;
-    color: black;
+.container .login .right .context .form .buttons .resetPass {
+    /*text-decoration: none;*/
+    /*color: black;*/
+    font-size: 14px;
+    font-weight: 500;
 }
 
-.container .login .right .form .button {
+.container .login .right .context .button {
+    margin-top: 20px;
     display: inline-block;
     padding: 12px 24px;
     font-weight: bolder;
@@ -155,30 +168,53 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.container .login .right .form .button:hover {
+.container .login .right .context .button:hover {
     background-color: #333;
     transform: scale(1.05);
 }
 
-.container .login .right .form .button:active {
+.container .login .right .context .button:active {
     background-color: #111;
     transform: scale(0.98);
 }
 
-.container .login .right .form .button:disabled {
+.container .login .right .context .button:disabled {
     background-color: #666;
     color: #ccc;
     cursor: not-allowed;
     box-shadow: none;
 }
 
-/*.container .login .right .form .logo, img {*/
-/*    width: 40px;*/
-/*    height: 40px;*/
-/*}*/
+.container .login .right .context .social_login {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    justify-content: center;
+}
 
-.container .login .right .form .desc a {
+.container .login .right .context .social_login .logo, img {
+    width: 40px;
+    height: 40px;
+}
+
+.container .login .right .context .register {
+    margin-top: 20px;
+}
+
+.container .login .right .context .register a {
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: 6px;
+}
+
+.container .login .right .context .desc {
+    margin-top: 10px;
+}
+
+.container .login .right .context .desc a {
     text-decoration: none;
     color: black;
+    font-weight: 500;
 }
 
