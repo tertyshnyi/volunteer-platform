@@ -80,7 +80,7 @@ The backend will be available at `http://localhost:8080`.
 
 ## **Running the Frontend**
 
-1. **Navigate to the backend directory:**
+1. **Navigate to the frontend directory:**
 
     ```bash
     cd frontend
