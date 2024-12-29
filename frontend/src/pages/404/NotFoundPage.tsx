@@ -13,13 +13,13 @@ const NotFoundPage: React.FC = () => {
                     autoplay
                     className={styles.lottieAnimation}
                 />
-                <h4 className={styles.notFoundSubtitle}>Oops! Page Not Found</h4>
+                <h4 className={styles.notFoundSubtitle}>
+                    Oops! Page Not Found
+                </h4>
                 <p className={styles.notFoundText}>
                     The page you are looking for doesn’t exist or has been moved.
                 </p>
-                <a href={routesConfig.home}
-                    className={styles.notFoundButton}
-                >
+                <a href={routesConfig.home} className={styles.notFoundButton}>
                     Take Me Home
                 </a>
             </div>
