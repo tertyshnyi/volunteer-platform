@@ -1,0 +1,150 @@
+.notFoundContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    background: #f5f5f5;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.notFoundContainer .notFoundContent {
+    text-align: center;
+    padding: 15px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 80%;
+    width: 500px;
+}
+
+.notFoundContainer .notFoundContent .notFoundSubtitle {
+    font-size: 1.5rem;
+    color: #424242;
+    margin: 10px 0;
+}
+
+.notFoundContainer .notFoundContent .notFoundText {
+    font-size: 0.9rem;
+    color: #757575;
+    margin-bottom: 15px;
+}
+
+.notFoundContainer .notFoundContent .notFoundButton {
+    margin-top: 20px;
+    display: inline-block;
+    padding: 12px 24px;
+    font-weight: bolder;
+    color: white;
+    background-color: black;
+    border: none;
+    border-radius: 8px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+}
+
+.notFoundContainer .notFoundContent .notFoundButton:hover {
+    background-color: #333;
+    transform: scale(1.05);
+}
+
+.notFoundContainer .notFoundContent .notFoundButton:active {
+    background-color: #111;
+    transform: scale(0.98);
+}
+
+.notFoundContainer .notFoundContent .notFoundButton:disabled {
+    background-color: #666;
+    color: #ccc;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+
+.notFoundContainer .notFoundContent .lottieAnimation {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    margin: auto;
+}
+
+/* Large monitors (1200px and larger) */
+@media (min-width: 1200px) {
+    .notFoundContainer .notFoundContent {
+        width: 600px;
+    }
+
+    .notFoundContainer .notFoundContent .notFoundSubtitle {
+        font-size: 2rem;
+    }
+
+    .notFoundContainer .notFoundContent .notFoundText {
+        font-size: 1rem;
+    }
+
+    .notFoundContainer .notFoundContent .lottieAnimation {
+        max-width: 300px;
+    }
+}
+
+/* Medium screens (960px to 1199px) */
+@media (max-width: 1199px) and (min-width: 960px) {
+    .notFoundContainer .notFoundContent {
+        width: 500px;
+    }
+
+    .notFoundContainer .notFoundContent .notFoundSubtitle {
+        font-size: 1.8rem;
+    }
+}
+
+/* Tablets (768px to 959px) */
+@media (max-width: 959px) and (min-width: 768px) {
+    .notFoundContainer .notFoundContent {
+        width: 400px;
+    }
+
+    .notFoundContainer .notFoundContent .notFoundSubtitle {
+        font-size: 1.5rem;
+    }
+}
+
+/* Phones (576px to 767px) */
+@media (max-width: 767px) and (min-width: 576px) {
+    .notFoundContainer .notFoundContent {
+        width: 350px;
+    }
+
+    .notFoundContainer .notFoundContent .lottieAnimation {
+        max-width: 200px;
+    }
+}
+
+/* Small phones (up to 576px) */
+@media (max-height: 363px) {
+    .notFoundContainer .notFoundContent {
+        width: 300px;
+        padding: 10px;
+    }
+
+    .notFoundContainer .notFoundContent .notFoundSubtitle {
+        font-size: 1.4rem;
+    }
+
+    .notFoundContainer .notFoundContent .notFoundText {
+        font-size: 0.8rem;
+    }
+
+    .notFoundContainer .notFoundContent .notFoundButton {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    .notFoundContainer .notFoundContent .lottieAnimation {
+        max-width: 150px;
+    }
+}
