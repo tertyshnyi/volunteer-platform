@@ -1,15 +1,9 @@
 import React from 'react';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-import { useNavigate } from 'react-router-dom';
+import {routesConfig} from '../../routes/routesConfig';
 import styles from './NotFoundPage.module.css';
 
 const NotFoundPage: React.FC = () => {
-    const navigate = useNavigate();
-
-    const goToHomePage = () => {
-        navigate('/');
-    };
-
     return (
         <div className={styles.notFoundContainer}>
             <div className={styles.notFoundContent}>
@@ -19,16 +13,15 @@ const NotFoundPage: React.FC = () => {
                     autoplay
                     className={styles.lottieAnimation}
                 />
-                <h4 className={styles.notFoundSubtitle}>Oops! Page Not Found</h4>
+                <h4 className={styles.notFoundSubtitle}>
+                    Oops! Page Not Found
+                </h4>
                 <p className={styles.notFoundText}>
                     The page you are looking for doesn’t exist or has been moved.
                 </p>
-                <button
-                    onClick={goToHomePage}
-                    className={styles.notFoundButton}
-                >
+                <a href={routesConfig.home} className={styles.notFoundButton}>
                     Take Me Home
-                </button>
+                </a>
             </div>
         </div>
     );
